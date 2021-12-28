@@ -21,14 +21,32 @@ import datetime
 import time
 #======python的函數庫==========
 
-app = Flask(__name__,tempfile='templates')
+app = Flask(__name__,template_folder='templates')
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
 line_bot_api = LineBotApi('wjdFptfUhAOnuKvv0OXy94a1xf6EZCZfzbkQQTU3/ylnfsIayK9GcsXE4Y1Kp+Ppx9RB9aMzxcl5+jEuSAJdjg7yEVVoPBxW7MDgv43HvKH4m3BZ7jYGTKDrdn3MZ9sLfmA+JwEz5mVHc60sR8pAhgdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
 handler = WebhookHandler('7f17d8122a657e4f72ce0fef281d7671')
 
+#wake up for heroku
+import threading
+import requests
+def wake_up_heroku():
+    while true :
+        url = 'https://linerobotone.herokuapp.com/'+'heroku_wake_up'
+        res = requests.get(url)
+        if res.status_code==200:
+            print('Wake up!!')
+        else :
+            print('Wake up - fail !!')
+            time.sleep(28*60)
 
+threading.Thread(target=wake_up_heroku()).start()
+
+
+@app.route("/heroku_wake_up")
+def wake_up():
+    return "wake up !!"
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
