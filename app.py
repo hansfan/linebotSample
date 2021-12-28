@@ -21,13 +21,33 @@ import datetime
 import time
 #======python的函數庫==========
 
-app = Flask(__name__)
+app = Flask(__name__, tempfile='templates')
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
 line_bot_api = LineBotApi('你的Channel AcessToken')
 # Channel Secret
 handler = WebhookHandler('你的Channel Secret')
 
+
+
+# don't sleep
+import threading 
+import requests
+def wake_up_heroku():
+    while true :
+        url = ' https://linerobotone.herokuapp.com/'+ 'heroku_wake_up'
+        res = requests.get(url)
+        if res.status_code ==200:
+            print('the bot was wake up.')
+        else:
+            print('the bot didn''t wake up. ')
+time.slep (28*60)
+
+threading.thread(target=wake_up_heroku()).start()
+
+@app.route("/heroku_wake_up")
+def wake_up():
+    return "Hey!Wake Up!!"
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
