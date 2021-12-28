@@ -20,8 +20,8 @@ import tempfile, os
 import datetime
 import time
 #======python的函數庫==========
-
-app = Flask(__name__,template_folder='templates')
+#app = Flask(__name__,template_folder='templates')
+app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
 line_bot_api = LineBotApi('wjdFptfUhAOnuKvv0OXy94a1xf6EZCZfzbkQQTU3/ylnfsIayK9GcsXE4Y1Kp+Ppx9RB9aMzxcl5+jEuSAJdjg7yEVVoPBxW7MDgv43HvKH4m3BZ7jYGTKDrdn3MZ9sLfmA+JwEz5mVHc60sR8pAhgdB04t89/1O/w1cDnyilFU=')
@@ -41,7 +41,7 @@ def wake_up_heroku():
             print('Wake up - fail !!')
             time.sleep(28*60)
 
-threading.Thread(target=wake_up_heroku()).start()
+#threading.Thread(target=wake_up_heroku()).start()
 
 
 @app.route("/heroku_wake_up")
