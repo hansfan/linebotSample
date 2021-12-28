@@ -21,7 +21,7 @@ import datetime
 import time
 #======python的函數庫==========
 
-app = Flask(__name__,tempfile='templates\index.html')
+app = Flask(__name__,tempfile='templates')
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
 line_bot_api = LineBotApi('wjdFptfUhAOnuKvv0OXy94a1xf6EZCZfzbkQQTU3/ylnfsIayK9GcsXE4Y1Kp+Ppx9RB9aMzxcl5+jEuSAJdjg7yEVVoPBxW7MDgv43HvKH4m3BZ7jYGTKDrdn3MZ9sLfmA+JwEz5mVHc60sR8pAhgdB04t89/1O/w1cDnyilFU=')
@@ -29,10 +29,6 @@ line_bot_api = LineBotApi('wjdFptfUhAOnuKvv0OXy94a1xf6EZCZfzbkQQTU3/ylnfsIayK9Gc
 handler = WebhookHandler('7f17d8122a657e4f72ce0fef281d7671')
 
 
-
- 
-
- 
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
